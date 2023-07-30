@@ -3,9 +3,11 @@
 # Abfragen
 read -p "Bitte geben Sie eine erste Login E-Mail ein: " usermail
 read -s -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
+echo
 
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
 read -s -p "Bitte geben Sie das E-Mail Passwort ein: " mailpw
+echo
 read -p "Bitte geben Sie den E-Mail Host ein: " mailhost
 read -p "Bitte geben Sie "SSL" oder "SMTP" ein: " ssl
 read -p "Bitte geben Sie den Postausgangsport ein: " mailport
@@ -38,11 +40,6 @@ sudo chown -R 1500:1500 docker/app
 
 # APP_KEY generieren und in ENV-Datei einfügen
 echo "APP_Key wird konfiguriert."
-#docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
-#key=$(cat appkey.txt)
-##echo "APP_Key in ENV-Datei einfügen"
-#sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
-# Generiere den Schlüssel und speichere ihn in einer Datei
 docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show | sed 's/\x1b\[[0-9;]*m//g' > appkey.txt
 appkey=$(cat ~/invoiceninja/dockerfiles/appkey.txt)
 sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$appkey|" ~/invoiceninja/dockerfiles/env
@@ -91,5 +88,9 @@ sed -i "s|192.168.0.124|$ip|" ~/invoiceninja/dockerfiles/docker-compose.yml
 echo "Docker wird gestartet."
 docker-compose up -d
 
-#
-hostname -I | cut -d' ' -f1
+# Alle Infos anzeigen
+echo
+echo "Webadresse: http://$(hostname -I | cut -d' ' -f1):80"
+echo "Datenbankpasswort: $DB_Passwort"
+echo "MYSQL Root Passwort: $MYSQL_ROOT_PASSWORD"
+echo "APP_KEY: $appkey"
