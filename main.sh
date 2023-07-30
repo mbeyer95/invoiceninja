@@ -20,11 +20,15 @@ echo "APP_Key konfigurieren"
 docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
 key=$(cat appkey.txt)
 sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
-rm -rf appkey.txt
 
 # IP-Adresse abrufen und in ENV-Datei einfügen
+echo "Webadresse konfigurieren"
 ip=$(hostname -I | cut -d' ' -f1)
 sed -i "s|APP_URL=http://in.localhost:8003|APP_URL=http://$ip:8003|" ~/invoiceninja/dockerfiles/env
+
+# PDF erzeugen auf TRUE
+echo "PDF Generator einstellen"
+sed -i "s|PHANTOMJS_PDF_GENERATION=false|PHANTOMJS_PDF_GENERATION=true|" ~/invoiceninja/dockerfiles/env
 
 echo "Ordner Berechtigung anpassen"
 chmod 755 docker/app/public
