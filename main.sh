@@ -26,9 +26,13 @@ sudo chown -R 1500:1500 docker/app
 
 # APP_KEY generieren und in ENV-Datei einfügen
 echo "APP_Key konfigurieren"
-docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
-key=$(cat appkey.txt)
-echo "APP_Key in ENV-Datei einfügen"
+#docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
+#key=$(cat appkey.txt)
+##echo "APP_Key in ENV-Datei einfügen"
+#sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
+# Generiere den Schlüssel und speichere ihn in einer Datei
+docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show | sed 's/\x1b\[[0-9;]*m//g' > appkey.txt
+key=$(cat ~/invoiceninja/dockerfiles/appkey.txt)
 sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
 
 # IP-Adresse abrufen und in ENV-Datei einfügen
