@@ -44,6 +44,10 @@ sed -i "s|APP_URL=http://in.localhost:8003|APP_URL=http://$ip:8003|" ~/invoiceni
 echo "Phantomjs PDF Generator anstellen"
 sed -i "s|PHANTOMJS_PDF_GENERATION=false|PHANTOMJS_PDF_GENERATION=true|" ~/invoiceninja/dockerfiles/env
 
+# Datenbank Passwort generieren und in ENV-Datei einfügen
+DB_PASSWORD=$(openssl rand -base64 16)
+sed -i "s|DB_PASSWORD=ninja|DB_PASSWORD=$DB_PASSWORD|" ~/invoiceninja/dockerfiles/env
+
 nano env
 
  
