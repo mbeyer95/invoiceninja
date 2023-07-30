@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Daten Abfragen
-echo -p "## ERSTE LOGINDATEN EINSTELLEN ##"
+echo "## ERSTE LOGINDATEN EINSTELLEN ##"
 read -p "Bitte geben Sie eine Login E-Mail ein: " usermail
 read -s -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
 echo
-echo -p "## POSTAUSGANGSEINSTELLUNGEN EINGEBEN (OPTIONAL) ##"
+echo "## POSTAUSGANGSEINSTELLUNGEN EINGEBEN (OPTIONAL) ##"
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
 read -s -p "Bitte geben Sie das Postausgangs Passwort ein: " mailpw
 echo
@@ -13,8 +13,8 @@ read -p "Bitte geben Sie die E-Mail Host-Adresse ein: " mailhost
 read -p "Bitte geben Sie 'SSL' oder 'SMTP' ein: " ssl
 read -p "Bitte geben Sie den Postausgangsport ein: " mailport
 read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
-echo -p "## PROXY-HOST (OPTIONAL) ##"
-read -p "Bitte geben Sie die IP-Adresse des PROXY-Servers ein (optional): " proxy
+echo "## PROXY-HOST (OPTIONAL) ##"
+read -p "Bitte geben Sie die IP-Adresse des PROXY-Servers ein: " proxy
 
 
 # Updates installieren
