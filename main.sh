@@ -11,14 +11,20 @@ apt install docker.io docker-compose -y
 echo "Zusatzpakete werden installiert"
 apt install wget unzip git -y
 
-echo "Git Repo clonen"
+echo "Invoice Ninja Installations-Daten herunterladen"
 git clone https://github.com/invoiceninja/dockerfiles.git
 cd dockerfiles
 
-# APP_KEY generieren und in die Datei einfügen
+# Ordnerberechtigungen anpassen
+echo "Ordnerberechtigungen anpassen"
+chmod 755 docker/app/public
+sudo chown -R 1500:1500 docker/app
+
+# APP_KEY generieren und in ENV-Datei einfügen
 echo "APP_Key konfigurieren"
 docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
 key=$(cat appkey.txt)
+echo "APP_Key in ENV-Datei einfügen"
 sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
 
 # IP-Adresse abrufen und in ENV-Datei einfügen
@@ -27,12 +33,8 @@ ip=$(hostname -I | cut -d' ' -f1)
 sed -i "s|APP_URL=http://in.localhost:8003|APP_URL=http://$ip:8003|" ~/invoiceninja/dockerfiles/env
 
 # PDF erzeugen auf TRUE
-echo "PDF Generator einstellen"
+echo "Phantomjs PDF Generator anstellen"
 sed -i "s|PHANTOMJS_PDF_GENERATION=false|PHANTOMJS_PDF_GENERATION=true|" ~/invoiceninja/dockerfiles/env
-
-echo "Ordner Berechtigung anpassen"
-chmod 755 docker/app/public
-sudo chown -R 1500:1500 docker/app
 
 nano env
 
