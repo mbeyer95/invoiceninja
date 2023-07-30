@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+echo "E-Mail:"
+read mail
+
 # Updates installieren
 echo "Updates werden installiert."
 sudo apt update
@@ -48,6 +52,9 @@ sed -i "s|PHANTOMJS_PDF_GENERATION=false|PHANTOMJS_PDF_GENERATION=true|" ~/invoi
 echo "Datenbankpasswort wird generiert."
 DB_PASSWORD=$(openssl rand -base64 16)
 sed -i "s|DB_PASSWORD=ninja|DB_PASSWORD=$DB_PASSWORD|" ~/invoiceninja/dockerfiles/env
+
+#
+sed -i "s|IN_USER_EMAIL=|IN_USER_EMAIL==$mail|" ~/invoiceninja/dockerfiles/env
 
 nano env
 
