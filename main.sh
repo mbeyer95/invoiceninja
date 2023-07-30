@@ -90,7 +90,7 @@ docker-compose up -d
 
 # Alle Infos anzeigen
 echo
-echo "Webadresse: http://$(hostname -I | cut -d' ' -f1):80"
-echo "Datenbankpasswort: $$DB_PASSWORD"
-echo "MYSQL Root Passwort: $MYSQL_ROOT_PASSWORD"
-echo "APP_KEY: $appkey"
+echo -e "Webadresse: \e[35mhttp://$(hostname -I | cut -d' ' -f1):80\e[0m"
+echo -e "Datenbankpasswort: \e[35m$DB_PASSWORD\e[0m"
+echo -e "MYSQL Root Passwort: \e[35m$MYSQL_ROOT_PASSWORD\e[0m"
+echo -e "APP_KEY: \e[35m$appkey\e[0m"
