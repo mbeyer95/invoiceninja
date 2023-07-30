@@ -5,7 +5,7 @@ echo "Updates werden installiert"
 #sudo apt upgrade -y
 #sudo apt autoremove -y
 
-echo "Docker werden installiert?"
+echo "Docker Pakete werden installiert"
 apt install docker.io docker-compose -y
 
 echo "Zusatzpakete werden installiert"
@@ -15,13 +15,16 @@ echo "Git Repo clonen"
 git clone https://github.com/invoiceninja/dockerfiles.git
 cd dockerfiles
 
-# Schlüssel generieren
-echo "APP_Key generieren"
-key=$(docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show)
-
-# Schlüssel in die Datei einfügen
+# APP_KEY generieren und in die Datei einfügen
+echo "APP_Key konfigurieren"
+docker run --rm -it invoiceninja/invoiceninja php artisan key:generate --show > appkey.txt
+key=$(cat appkey.txt)
 sed -i "s|APP_KEY=<insert your generated key in here>|APP_KEY=$key|" ~/invoiceninja/dockerfiles/env
+rm -rf appkey.txt
 
+# IP-Adresse abrufen und in ENV-Datei einfügen
+ip=$(hostname -I | cut -d' ' -f1)
+sed -i "s|APP_URL=http://in.localhost:8003|APP_URL=http://$ip:8003|" ~/invoiceninja/dockerfiles/env
 
 echo "Ordner Berechtigung anpassen"
 chmod 755 docker/app/public
