@@ -83,7 +83,13 @@ sed -i "s|MAIL_ENCRYPTION=null|MAIL_ENCRYPTION=$ssl|" ~/invoiceninja/dockerfiles
 sed -i "s|MAIL_FROM_ADDRESS='user@example.com'|MAIL_FROM_ADDRESS=$mailusername|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_FROM_NAME='Self Hosted User'|MAIL_FROM_NAME=$mailfrom|" ~/invoiceninja/dockerfiles/env
 
+# IP Adresse in der docker-compose.yml ändern
+echo "Docker-Compose Datei wird angepasst."
+sed -i "s|192.168.0.124|$ip|" ~/invoiceninja/dockerfiles/docker-compose.yml
 
-nano env
+# Docker starten
+echo "Docker wird gestartet."
+docker-compose up -d
 
- 
+#
+hostname -I | cut -d' ' -f1
