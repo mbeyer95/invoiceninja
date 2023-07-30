@@ -1,16 +1,20 @@
 #!/bin/bash
 
+# Updates installieren
 echo "Updates werden installiert"
 #sudo apt update
 #sudo apt upgrade -y
 #sudo apt autoremove -y
 
+# Docker Pakete installieren
 echo "Docker Pakete werden installiert"
 apt install docker.io docker-compose -y
 
+# wget, unzip und git installieren
 echo "Zusatzpakete werden installiert"
 apt install wget unzip git -y
 
+# Invoice Ninja Dockerfiles herunterladen aus GIT
 echo "Invoice Ninja Installations-Daten herunterladen"
 git clone https://github.com/invoiceninja/dockerfiles.git
 cd dockerfiles
