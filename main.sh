@@ -2,9 +2,9 @@
 
 # Updates installieren
 echo "Updates werden installiert"
-#sudo apt update
-#sudo apt upgrade -y
-#sudo apt autoremove -y
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
 
 # Docker Pakete installieren
 echo "Docker Pakete werden installiert"
