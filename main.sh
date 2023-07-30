@@ -1,7 +1,9 @@
 #!/bin/bash
 
 echo "Updates werden installiert"
-sudo apt update && sudo apt upgrades -y && sudo apt autoremove -y
+sudo apt update
+sudo apt upgrades -y
+sudo apt autoremove -y
 
 echo "Docker werden installiert?"
 apt install docker.io docker-compose
@@ -17,3 +19,4 @@ echo "Git Repo clonen"
 git clone https://github.com/invoiceninja/dockerfiles.git
 cd dockerfiles
 
+ 
