@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Abfragen
+# Daten Abfragen
 read -p "Bitte geben Sie eine erste Login E-Mail ein: " usermail
 read -s -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
 echo
-
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
 read -s -p "Bitte geben Sie das Postausgangs Passwort ein: " mailpw
 echo
@@ -12,7 +11,6 @@ read -p "Bitte geben Sie die E-Mail Host-Adresse ein: " mailhost
 read -p "Bitte geben Sie 'SSL' oder 'SMTP' ein: " ssl
 read -p "Bitte geben Sie den Postausgangsport ein: " mailport
 read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
-
 
 # Updates installieren
 echo "Updates werden installiert."
