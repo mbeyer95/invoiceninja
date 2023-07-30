@@ -2,16 +2,14 @@
 
 # Abfragen
 read -p "Bitte geben Sie eine Login E-Mail an: " usermail
-read -p "Bitte geben Sie eine Passwort an: " userpw
+read -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
 
-read -p "Bitte geben Sie den E-Mail Host ein: " mailhost
-read -p "Bitte geben Sie einen den Postausgangsport ein: " mailport
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
-read -p "Bitte geben Sie das E-Mail Passwort ein: " mailpw
-read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
+read -p "Bitte geben Sie das Passwort ein: " mailpw
+read -p "Bitte geben Sie den E-Mail Host ein: " mailhost
 read -p "Bitte geben Sie SSL oder SMTP ein: " ssl
-
-
+read -p "Bitte geben Sie einen den Postausgangsport ein: " mailport
+read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
 
 
 # Updates installieren
