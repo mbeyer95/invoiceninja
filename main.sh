@@ -9,7 +9,7 @@ read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
 read -s -p "Bitte geben Sie das Postausgangs Passwort ein: " mailpw
 echo
 read -p "Bitte geben Sie die E-Mail Host-Adresse ein: " mailhost
-read -p "Bitte geben Sie "SSL" oder "SMTP" ein: " ssl
+read -p "Bitte geben Sie 'SSL' oder 'SMTP' ein: " ssl
 read -p "Bitte geben Sie den Postausgangsport ein: " mailport
 read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
 
@@ -91,6 +91,6 @@ docker-compose up -d
 # Alle Infos anzeigen
 echo
 echo "Webadresse: http://$(hostname -I | cut -d' ' -f1):80"
-echo "Datenbankpasswort: $DB_Passwort"
+echo "Datenbankpasswort: $$DB_PASSWORD"
 echo "MYSQL Root Passwort: $MYSQL_ROOT_PASSWORD"
 echo "APP_KEY: $appkey"
