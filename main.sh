@@ -2,10 +2,10 @@
 
 # Abfragen
 read -p "Bitte geben Sie eine Login E-Mail an: " usermail
-read -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
+read -s -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
 
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
-read -p "Bitte geben Sie das Passwort ein: " mailpw
+read -s -p "Bitte geben Sie das Passwort ein: " mailpw
 read -p "Bitte geben Sie den E-Mail Host ein: " mailhost
 read -p "Bitte geben Sie SSL oder SMTP ein: " ssl
 read -p "Bitte geben Sie einen den Postausgangsport ein: " mailport
@@ -78,7 +78,7 @@ sed -i "s|MAIL_PORT=2525|MAIL_PORT=$mailport|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_USERNAME=null|MAIL_USERNAME=$mailusername|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_PASSWORD=null|MAIL_PASSWORD=$mailpw|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_ENCRYPTION=null|MAIL_ENCRYPTION=$ssl|" ~/invoiceninja/dockerfiles/env
-sed -i "s|MAIL_FROM_ADDRESS='user@example.com'|MAIL_FROM_ADDRESS='user@example.com'$mailusername|" ~/invoiceninja/dockerfiles/env
+sed -i "s|MAIL_FROM_ADDRESS='user@example.com'|MAIL_FROM_ADDRESS=$mailusername|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_FROM_NAME='Self Hosted User'|MAIL_FROM_NAME=$mailfrom|" ~/invoiceninja/dockerfiles/env
 
 nano env
