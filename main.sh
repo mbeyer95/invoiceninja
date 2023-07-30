@@ -83,6 +83,10 @@ sed -i "s|MAIL_ENCRYPTION=null|MAIL_ENCRYPTION=$ssl|" ~/invoiceninja/dockerfiles
 sed -i "s|MAIL_FROM_ADDRESS='user@example.com'|MAIL_FROM_ADDRESS=$mailusername|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_FROM_NAME='Self Hosted User'|MAIL_FROM_NAME=$mailfrom|" ~/invoiceninja/dockerfiles/env
 
+# PROXY Adresse eintragen
+sed -i "s|TRUSTED_PROXIES=*|TRUSTED_PROXIES=$proxy|" ~/invoiceninja/dockerfiles/env
+
+
 # IP Adresse in der docker-compose.yml ändern
 echo "Docker-Compose Datei wird angepasst."
 sed -i "s|192.168.0.124|$ip|" ~/invoiceninja/dockerfiles/docker-compose.yml
