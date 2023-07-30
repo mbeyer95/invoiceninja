@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Abfragen
-read -p "Bitte geben Sie eine Login E-Mail an: " usermail
+read -p "Bitte geben Sie eine erste Login E-Mail ein: " usermail
 read -s -p "Bitte geben Sie ein Passwort für den Login ein: " userpw
 
 read -p "Bitte geben Sie die Postausgangs E-Mail Adresse ein: " mailusername
-read -s -p "Bitte geben Sie das Passwort ein: " mailpw
+read -s -p "Bitte geben Sie das E-Mail Passwort ein: " mailpw
 read -p "Bitte geben Sie den E-Mail Host ein: " mailhost
-read -p "Bitte geben Sie SSL oder SMTP ein: " ssl
-read -p "Bitte geben Sie einen den Postausgangsport ein: " mailport
+read -p "Bitte geben Sie "SSL" oder "SMTP" ein: " ssl
+read -p "Bitte geben Sie den Postausgangsport ein: " mailport
 read -p "Bitte geben Sie den Absendernamen ein: " mailfrom
 
 
@@ -68,10 +68,12 @@ MYSQL_ROOT_PASSWORD=$(openssl rand -base64 16)
 sed -i "s|MYSQL_ROOT_PASSWORD=ninjaAdm1nPassword|MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD|" ~/invoiceninja/dockerfiles/env
 
 # Erste Logindaten konfigurieren
+echo "Logindaten werden gespeichert."
 sed -i "s|IN_USER_EMAIL=|IN_USER_EMAIL=$usermail|" ~/invoiceninja/dockerfiles/env
 sed -i "s|IN_PASSWORD=|IN_PASSWORD=$userpw|" ~/invoiceninja/dockerfiles/env
 
 # E-Mail Postausgangs-Einstellungen konfigurieren.
+echo "Postausgangseinstellungen werden gespeichert."
 sed -i "s|MAIL_MAILER=log|MAIL_MAILER=smtp|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_HOST=smtp.mailtrap.io|MAIL_HOST=$mailhost|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_PORT=2525|MAIL_PORT=$mailport|" ~/invoiceninja/dockerfiles/env
@@ -80,6 +82,7 @@ sed -i "s|MAIL_PASSWORD=null|MAIL_PASSWORD=$mailpw|" ~/invoiceninja/dockerfiles/
 sed -i "s|MAIL_ENCRYPTION=null|MAIL_ENCRYPTION=$ssl|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_FROM_ADDRESS='user@example.com'|MAIL_FROM_ADDRESS=$mailusername|" ~/invoiceninja/dockerfiles/env
 sed -i "s|MAIL_FROM_NAME='Self Hosted User'|MAIL_FROM_NAME=$mailfrom|" ~/invoiceninja/dockerfiles/env
+
 
 nano env
 
