@@ -37,7 +37,7 @@ git clone https://github.com/invoiceninja/dockerfiles.git
 cd dockerfiles
 
 # Ordnerberechtigungen anpassen
-echo "Ordnerberechtigungen weren angepasst."
+echo "Ordnerberechtigungen werden angepasst."
 chmod 755 docker/app/public
 sudo chown -R 1500:1500 docker/app
 
